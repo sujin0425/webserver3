@@ -1,0 +1,44 @@
+<%
+	//페이징 처리 기법
+	var totalRecord = 126; // 총 레코드 수
+	var pageSize = 10; // 페이지당 보여질 레코드 수
+	var totalPage = Math.ceil(totalRecord/pageSize); 
+%>
+<%="totalRecord is " + totalRecord%><br>
+<%="pageSize is " + pageSize%><br>
+<%="totalPage is " + totalPage%>
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+	</script>
+ </head>
+ <body>
+ 	<table border="1px" width="100%">
+		<thead>
+			<caption>공지 게시판</caption>
+		</thead>
+		<tbody>
+			<tr>
+				<td>17</td>
+				<td>홍길동</td>
+				<td>제목입니다</td>
+				<td>2018-08-04</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="5" align = "center">
+					<%for(var i = 1; i<=totalPage; i++){%>
+						[<%=i%>]
+					<%}%>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+ </body>
+</html>
