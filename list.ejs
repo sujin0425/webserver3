@@ -1,60 +1,74 @@
-<%="msg is " + msg%><br>
-<%="currentPage is " + currentPage%><br>
-<%="totalRecord is " + totalRecord%><br>
-<%="pageSize is " + pageSize%><br>
-<%="totalPage is " + totalPage%><br>
-<%="blockSize is " + blockSize%><br>
+<%="currentPage is "+currentPage%><br>
+<%="totalRecord is "+totalRecord%><br>
+<%="pageSize is "+pageSize%><br>
+<%="totalPage is "+totalPage%><br>
+<%="blockSize is "+blockSize%><br>
 <!doctype html>
 <html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-	<style>
-	a{text-decoration:none;}
-	.numStyle{
-		font-size : 25px;
-		color	: blue;
-		font-weight : bold;
-	}
-	</style>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script>
-	</script>
- </head>
- <body>
- 	<table border="1px" width="100%">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+a{text-decoration:none;}
+.numStyle{
+	font-size:25px;
+	color:blue;
+	font-weight:bold;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+</script>
+</head>
+<body>
+	<table border="1px" width="100%">
 		<thead>
 			<caption>공지 게시판</caption>
 		</thead>
 		<tbody>
 			<tr>
-				<th width="5%">No</th>
+				<th width="5%">No</th>			
 				<th width="15%">작성자</th>
 				<th width="60%">제목</th>
 				<th width="15%">작성일</th>
 				<th width="5%">조회수</th>
 			</tr>
-			<%for(var i = 0;pageSize;i++){%>
+			<%for(var i=0;i<pageSize;i++){%>
+			<%if(num<1)break;%>
 			<tr>
-				<td>17</td>
+				<td><%=num%></td>
 				<td>홍길동</td>
 				<td>제목입니다</td>
 				<td>2018-08-04</td>
 				<td>34</td>
 			</tr>
+			<%num--;%>
 			<%}%>
-
+			
 			<tr>
-				<td colspan="5" align = "center">
-					◀
-					<%for(var i = firstPage; i<=lastPage; i++){%>
-						<%if(i>totalPage)break;%>
-						<a  <%if(currentPage==i){%>class="numStyle" <%}%>href="/list?currentPage=<%=i%>">[<%=i%>]</a>
+				<td colspan="5" align="center">
+					
+					<%if(firstPage-1>1){%>
+						<a href="/list?currentPage=<%=firstPage-1%>">◀</a>
+					<%}else{%>
+						<a href="javascript:alert('처음페이지 입니다');">◀</a>
 					<%}%>
-					▶
+
+					<%for(var i=firstPage;i<=lastPage;i++){%>
+						<%if(i>totalPage)break;%>
+						<a  <%if(currentPage==i){%>class="numStyle"<%}%>  href="/list?currentPage=<%=i%>">[<%=i%>]</a>
+					<%}%>
+					
+					<%if(lastPage+1 < totalPage){//더 볼게있다면...%>
+						<a href="/list?currentPage=<%=lastPage+1%>">▶</a>
+					<%}else{%>	
+						<a href="javascript:alert('마지막 페이지입니다');">▶</a>
+					<%}%>
+
 				</td>
 			</tr>
 		</tbody>
-		</table>
- </body>
+	</table>
+</body>
 </html>
